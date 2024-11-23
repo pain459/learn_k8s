@@ -1,0 +1,10 @@
+Top level yaml structure:
+
+apiVersion:
+kind:
+metadata:
+
+
+version:
+
+-------------------------
