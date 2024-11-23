@@ -203,3 +203,30 @@ spec:
   type: LoadBalancer
 ```
 
+### **ConfigMap**
+
+Description: A ConfigMap is used to store configuration data as key-value pairs that can be consumed by Pods.
+
+Simple ConfigMap:
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: simple-config
+data:
+  key1: value1
+  key2: value2
+```
+
+ConfigMap with file reference:
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: file-config
+data:
+  app-config.yaml: |
+    logging:
+      level: debug
+```
+
