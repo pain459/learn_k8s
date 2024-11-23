@@ -294,3 +294,26 @@ spec:
       storage: 5Gi
 ```
 
+### **Ingress**
+
+Description: An Ingress provides HTTP/HTTPS routing to Services, often using a load balancer or reverse proxy.
+
+Example:
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-ingress
+spec:
+  rules:
+  - host: my-app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: my-service
+            port:
+              number: 80
+```
