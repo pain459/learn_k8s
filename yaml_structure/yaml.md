@@ -42,3 +42,164 @@ spec:
   - name: nginx-container
     image: nginx
 ```
+
+Multi Container Pod:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multi-container-pod
+spec:
+  containers:
+  - name: app-container
+    image: my-app:latest
+  - name: sidecar-container
+    image: my-sidecar:latest
+```
+
+Pod with Volume
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-volume
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    volumeMounts:
+    - mountPath: /data
+      name: my-volume
+  volumes:
+  - name: my-volume
+    emptyDir: {}
+```
+
+### **Deployment**
+
+Description: A Deployment ensures that a specified number of replicas of an application are running. It manages scaling and rolling updates.
+
+Basic Deployment
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: basic-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+```
+
+Deployment with Environment Variables
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-with-env
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app-container
+        image: my-app:latest
+        env:
+        - name: ENV_VAR_NAME
+          value: ENV_VAR_VALUE
+```
+
+Rolling update Deployment
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rolling-update-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app-container
+        image: my-app:1.0
+```
+
+### **Service**
+
+Description: A Service exposes a group of Pods to the network, enabling communication. Types of Services include ClusterIP, NodePort, LoadBalancer, and ExternalName.
+
+ClusterIP Service (Default):
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: clusterip-service
+spec:
+  selector:
+    app: my-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: ClusterIP
+```
+
+NodePort Service:
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeport-service
+spec:
+  selector:
+    app: my-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 30001
+  type: NodePort
+```
+
+Load Balancer Service:
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: loadbalancer-service
+spec:
+  selector:
+    app: my-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: LoadBalancer
+```
+
