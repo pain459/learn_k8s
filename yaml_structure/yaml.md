@@ -257,3 +257,22 @@ data:
   tls.key: <base64-encoded-key>
 ```
 
+### **PersistentVolume (PV)**
+
+Description: A PersistentVolume is a storage resource in the cluster, abstracting storage implementation details.
+
+Example:
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: my-pv
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: /data
+```
+
