@@ -230,3 +230,30 @@ data:
       level: debug
 ```
 
+### **Secret**
+
+Description: A Secret stores sensitive information, such as passwords or tokens, in base64-encoded format.
+
+Opaque Secret:
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-secret
+data:
+  username: YWRtaW4=  # base64 for 'admin'
+  password: cGFzc3dvcmQ=  # base64 for 'password'
+```
+
+TLS Secret:
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tls-secret
+type: kubernetes.io/tls
+data:
+  tls.crt: <base64-encoded-cert>
+  tls.key: <base64-encoded-key>
+```
+
