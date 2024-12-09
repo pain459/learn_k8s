@@ -38,3 +38,19 @@ kubectl --context <context_here> logs <pod-name> -n <namespace>
 
 # Get logs from specific container in a pod
 kubectl --context <context_here> logs <pod-name> -n <namespace> -c <container-name>
+
+
+# Storage related commands
+kubectl get pvc -n <namespace>
+kubectl get pv
+kubectl describe pvc <pvc-name> -n <namespace>
+
+
+# Config and secrets
+kubectl get configmaps -n <namespace>
+kubectl get secrets -n <namespace>
+kubectl describe configmap <configmap-name> -n <namespace>
+kubectl describe secret <secret-name> -n <namespace>
+
+# Get list of contexts
+kubectl config get-contexts
