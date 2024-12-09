@@ -1,3 +1,8 @@
 # Check cluster info
 kubectl --context <context_here> cluster-info
 
+# Get nodes in a cluster, get the first 5.
+kubectl --context <context_here> get nodes | head
+
+# Get node information
+kubectl --context <context_here> describe node <node_name>
