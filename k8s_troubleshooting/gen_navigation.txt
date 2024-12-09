@@ -6,3 +6,14 @@ kubectl --context <context_here> get nodes | head
 
 # Get node information
 kubectl --context <context_here> describe node <node_name>
+
+
+# list all namespaces, display only 5.
+kubectl --context <context> get namespaces | head
+
+# Switch to specific namespace.
+kubectl --context <context_here> config set-context --current --namespace=<namespace>
+
+# inspect a namespace.
+kubectl --context <context_here> describe namespace <namespace>
+
