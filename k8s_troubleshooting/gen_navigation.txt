@@ -17,3 +17,24 @@ kubectl --context <context_here> config set-context --current --namespace=<names
 # inspect a namespace.
 kubectl --context <context_here> describe namespace <namespace>
 
+
+# List all pods in a namespace
+kubectl --context <context_here> get pods --all-namespaces | head
+
+# List all deployments
+kubectl --context <context_here> get deployments -n <namespace> | head
+
+# List all services
+kubectl --context <context_here> get svc -n <namespace> | head
+
+# List all replicasets
+kubectl --context <context_here> get rs -n <namespace> | head
+
+# Inspect a specific pod
+kubectl --context <context_here> describe pod <pod-name> -n <namespace>
+
+# Get logs from a specific pod
+kubectl --context <context_here> logs <pod-name> -n <namespace>
+
+# Get logs from specific container in a pod
+kubectl --context <context_here> logs <pod-name> -n <namespace> -c <container-name>
