@@ -1,0 +1,3 @@
+# Check cluster info
+kubectl --context <context_here> cluster-info
+
