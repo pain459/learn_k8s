@@ -40,3 +40,20 @@ You should get:
 Notice now it’s from Redis and should return the same value until the TTL expires.
 
 After 5 Minutes: After 5 minutes, the key in Redis will expire. The next call will again fetch a new value from App A.
+
+---
+
+access redis to see the key and expiry TTL
+
+PS C:\Users\kumar> kubectl exec -it redis-7c7d4894b9-rz6qj -n caching-demo -- redis-cli
+127.0.0.1:6379> KEYS *
+1) "the_value"
+127.0.0.1:6379> GET "the_value"
+"44"
+127.0.0.1:6379> GET "the_value"
+"44"
+127.0.0.1:6379> TTL "the_value"
+(integer) 133
+127.0.0.1:6379> TTL "the_value"
+(integer) 131
+127.0.0.1:6379>
