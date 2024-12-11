@@ -56,4 +56,5 @@ PS C:\Users\kumar> kubectl exec -it redis-7c7d4894b9-rz6qj -n caching-demo -- re
 (integer) 133
 127.0.0.1:6379> TTL "the_value"
 (integer) 131
-127.0.0.1:6379>
+127.0.0.1:6379> TTL "the_value"
+(integer) -2
