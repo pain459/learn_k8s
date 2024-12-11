@@ -36,3 +36,54 @@ kubectl config use-context my-context-1
 
 ---
 
+# Apply the configmap, deployment and service in order.
+PS D:\src_git\learn_k8s\practice_files> kubectl --context local-context-1 -n local-namespace-1 apply -f .\hello-world-configmap.yaml
+configmap/hello-world-content created
+PS D:\src_git\learn_k8s\practice_files> kubectl --context local-context-1 -n local-namespace-1 apply -f .\hello-world-deployment.yaml
+deployment.apps/hello-world-deployment created
+PS D:\src_git\learn_k8s\practice_files> kubectl --context local-context-1 -n local-namespace-1 apply -f .\hello-world-service.yaml   
+service/hello-world-service created
+
+---
+
+# Accessing the newly configured services.
+
+PS C:\Users\kumar> kubectl --context local-context-1 -n local-namespace-1 describe configmaps hello-world-content
+Name:         hello-world-content
+Namespace:    local-namespace-1
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+index.html:
+----
+<html>
+<head><title>Hello World</title></head>
+<body>
+  <h1>Hello, World from Nginx on Kubernetes!</h1>
+</body>
+</html>
+
+
+BinaryData
+====
+
+Events:  <none>
+PS C:\Users\kumar> kubectl --context local-context-1 -n local-namespace-1 get pods
+NAME                                      READY   STATUS    RESTARTS   AGE
+hello-world-deployment-5d9ddbb9b4-5cksk   1/1     Running   0          30s
+hello-world-deployment-5d9ddbb9b4-lm6h5   1/1     Running   0          30s
+PS C:\Users\kumar> kubectl --context local-context-1 -n local-namespace-1 get deployment
+NAME                     READY   UP-TO-DATE   AVAILABLE   AGE
+hello-world-deployment   2/2     2            2           39s
+PS C:\Users\kumar> kubectl --context local-context-1 -n local-namespace-1 get replicaset
+NAME                                DESIRED   CURRENT   READY   AGE
+hello-world-deployment-5d9ddbb9b4   2         2         2       46s
+PS C:\Users\kumar> kubectl --context local-context-1 -n local-namespace-1 get services
+NAME                  TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+hello-world-service   NodePort   10.99.248.221   <none>        80:30080/TCP   24s
+PS C:\Users\kumar>
+
+---
+
