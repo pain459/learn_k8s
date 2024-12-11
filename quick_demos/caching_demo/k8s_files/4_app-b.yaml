@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: app-b
-        image: app-b:latest
+        image: app-b:v1
         imagePullPolicy: Never
         env:
           - name: REDIS_HOST
