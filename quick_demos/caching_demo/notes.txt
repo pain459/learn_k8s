@@ -1,0 +1,42 @@
+Testing the Setup
+Apply all manifests:
+
+kubectl apply -f namespace.yaml
+kubectl apply -f redis.yaml
+kubectl apply -f app-a.yaml
+kubectl apply -f app-b.yaml
+
+
+Port Forward to Test: To test locally, you can port forward app-b’s service:
+
+kubectl port-forward svc/app-b -n caching-demo 8080:5000
+
+
+Now you can hit app-b from your local machine:
+
+curl http://localhost:8080/cached-value
+
+
+Check Initial Response: The first time you call cached-value, it should fetch from App A (source: "appA").
+
+{
+  "source": "appA",
+  "value": 42   // example random number
+}
+
+
+Subsequent Calls: Calling it again within 5 minutes:
+
+curl http://localhost:8080/cached-value
+
+
+You should get:
+
+{
+  "source": "redis",
+  "value": 42
+}
+
+Notice now it’s from Redis and should return the same value until the TTL expires.
+
+After 5 Minutes: After 5 minutes, the key in Redis will expire. The next call will again fetch a new value from App A.

@@ -1,0 +1,7 @@
+FROM python:3.9-slim
+WORKDIR /app
+COPY app_b.py /app
+RUN pip install flask requests redis
+ENV FLASK_APP=app_b.py
+EXPOSE 5000
+CMD ["python", "app_b.py"]
