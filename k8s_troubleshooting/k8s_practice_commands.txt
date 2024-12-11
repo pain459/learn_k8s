@@ -46,6 +46,11 @@ service/hello-world-service created
 
 ---
 
+# If you are still unable to access the service.
+kubectl port-forward svc/hello-world-service 8080:80
+
+---
+
 # Accessing the newly configured services.
 
 PS C:\Users\kumar> kubectl --context local-context-1 -n local-namespace-1 describe configmaps hello-world-content
