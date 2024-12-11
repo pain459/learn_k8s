@@ -115,3 +115,24 @@ PS C:\Users\kumar> kubectl --context local-context-1 -n local-namespace-1 get re
 NAME                                DESIRED   CURRENT   READY   AGE
 hello-world-deployment-5d9ddbb9b4   0         0         0       17m
 hello-world-deployment-75dcb8f775   2         2         2       5s
+
+---
+
+# Deploying another service with resource limits.
+
+PS D:\src_git\learn_k8s\practice_files> kubectl --context local-context-1 -n local-namespace-1 apply -f .\apache-configmap.yaml
+configmap/apache-content created
+PS D:\src_git\learn_k8s\practice_files> kubectl --context local-context-1 -n local-namespace-1 apply -f .\apache-deployment.yaml
+deployment.apps/apache-deployment created
+PS D:\src_git\learn_k8s\practice_files> kubectl --context local-context-1 -n local-namespace-1 apply -f .\apache-service.yaml   
+service/apache-service created
+
+# There is an error if we have not created and applied configmap for this service.
+# Describing the Events
+Events:
+  Type     Reason       Age                  From               Message
+  ----     ------       ----                 ----               -------
+  Normal   Scheduled    2m34s                default-scheduler  Successfully assigned local-namespace-1/apache-deployment-5f688cb475-p45tw to docker-desktop
+  Warning  FailedMount  32s (x9 over 2m34s)  kubelet            MountVolume.SetUp failed for volume "html-volume" : configmap "apache-content" not found
+
+---
