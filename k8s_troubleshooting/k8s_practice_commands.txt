@@ -92,3 +92,26 @@ PS C:\Users\kumar>
 
 ---
 
+# 2 ways to apply the changes 
+
+# 1. to delete the pods.
+
+PS C:\Users\kumar> kubectl --context local-context-1 -n local-namespace-1 get pods
+NAME                                      READY   STATUS    RESTARTS   AGE
+hello-world-deployment-75dcb8f775-5xq2v   1/1     Running   0          33s
+hello-world-deployment-75dcb8f775-trlqf   1/1     Running   0          92s
+PS C:\Users\kumar> kubectl --context local-context-1 -n local-namespace-1 delete pod hello-world-deployment-75dcb8f775-trlqf
+pod "hello-world-deployment-75dcb8f775-trlqf" deleted
+PS C:\Users\kumar> kubectl --context local-context-1 -n local-namespace-1 get pods
+NAME                                      READY   STATUS    RESTARTS   AGE
+hello-world-deployment-75dcb8f775-5xq2v   1/1     Running   0          58s
+hello-world-deployment-75dcb8f775-9rzl4   1/1     Running   0          13s
+PS C:\Users\kumar>
+
+# 2. To perform a rollout restart.
+PS C:\Users\kumar> kubectl --context local-context-1 -n local-namespace-1 rollout restart deployment/hello-world-deployment
+deployment.apps/hello-world-deployment restarted
+PS C:\Users\kumar> kubectl --context local-context-1 -n local-namespace-1 get replicaset
+NAME                                DESIRED   CURRENT   READY   AGE
+hello-world-deployment-5d9ddbb9b4   0         0         0       17m
+hello-world-deployment-75dcb8f775   2         2         2       5s
