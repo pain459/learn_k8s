@@ -27,3 +27,12 @@ kube-public         Active   9m3s
 kube-system         Active   9m3s
 local-namespace-1   Active   7s
 PS C:\Users\kumar>
+
+---
+
+# Set up default context and namespace
+kubectl config set-context my-context-1 --namespace=local-namespace-1
+kubectl config use-context my-context-1
+
+---
+
