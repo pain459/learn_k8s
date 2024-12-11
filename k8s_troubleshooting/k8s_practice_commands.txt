@@ -13,3 +13,17 @@ CURRENT   NAME              CLUSTER          AUTHINFO         NAMESPACE
 *         docker-desktop    docker-desktop   docker-desktop
           local-context-1   docker-desktop   docker-desktop
 PS C:\Users\kumar>
+
+---
+
+# Create local namesapces in a given context
+PS C:\Users\kumar> kubectl --context local-context-1 create namespace local-namespace-1
+namespace/local-namespace-1 created
+PS C:\Users\kumar> kubectl --context local-context-1 get namespaces
+NAME                STATUS   AGE
+default             Active   9m3s
+kube-node-lease     Active   9m3s
+kube-public         Active   9m3s
+kube-system         Active   9m3s
+local-namespace-1   Active   7s
+PS C:\Users\kumar>
