@@ -1,0 +1,15 @@
+# To get required contexts
+PS C:\Users\kumar> kubectl config get-contexts
+CURRENT   NAME             CLUSTER          AUTHINFO         NAMESPACE
+*         docker-desktop   docker-desktop   docker-desktop
+
+---
+
+# Create a new context
+PS C:\Users\kumar> kubectl config set-context local-context-1 --cluster=docker-desktop --user=docker-desktop
+Context "local-context-1" created.
+PS C:\Users\kumar> kubectl config get-contexts
+CURRENT   NAME              CLUSTER          AUTHINFO         NAMESPACE
+*         docker-desktop    docker-desktop   docker-desktop
+          local-context-1   docker-desktop   docker-desktop
+PS C:\Users\kumar>
