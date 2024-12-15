@@ -1,3 +1,4 @@
+# log_server.py
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import sys
 

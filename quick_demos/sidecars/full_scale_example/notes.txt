@@ -1,0 +1,7 @@
+# In the same directory as log_server.py
+echo "FROM python:3.9-slim
+COPY log_server.py /log_server.py
+CMD [\"python\", \"/log_server.py\"]" > Dockerfile
+
+docker build -t <your-registry>/log-collector:latest .
+docker push <your-registry>/log-collector:latest
