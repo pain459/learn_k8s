@@ -28,3 +28,14 @@ spec:
   volumes:
   - name: nginx-logs
     emptyDir: {}
+
+
+# Testing
+
+# kubectl port-forward pod/nginx-with-sidecar 8080:80
+# then check to logs after accessing localhost:8080
+# C:\Users\kumar>kubectl logs --context local-context-1 nginx-with-sidecar -c log-sidecar
+
+# C:\Users\kumar>kubectl logs --context local-context-1 nginx-with-sidecar -c log-sidecar --follow
+# 127.0.0.1 - - [15/Dec/2024:15:42:14 +0000] "GET / HTTP/1.1" 200 615 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" "-"
+# 127.0.0.1 - - [15/Dec/2024:15:42:14 +0000] "GET /favicon.ico HTTP/1.1" 404 555 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" "-"
